@@ -43,15 +43,17 @@ pub struct Raid {
     ivs: [u8; 6],
     tera_type: u8,
     star_level: u8,
+    event: bool,
 }
 
 impl Display for Raid {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         writeln!(
             f,
-            "Area: {} Den: {}",
+            "Area: {} Den: {}{}",
             AREAS[self.area as usize - 1],
-            self.den
+            self.den,
+            if self.event { " (Event)" } else { "" }
         )?;
         writeln!(f, "Seed: {:0>8X}", self.seed)?;
         writeln!(f, "EC: {:0>8X}", self.ec)?;
@@ -105,26 +107,39 @@ impl Raid {
 
 impl From<&[u8]> for Raid {
     fn from(data: &[u8]) -> Self {
+
+        eprintln!("{:?}", data);
         let _unk1 = u32::from_le_bytes(data[0..4].try_into().unwrap());
         let area = u32::from_le_bytes(data[4..8].try_into().unwrap());
         let _unk_3 = u32::from_le_bytes(data[8..12].try_into().unwrap());
         let den = u32::from_le_bytes(data[12..16].try_into().unwrap());
         let seed = u32::from_le_bytes(data[16..20].try_into().unwrap());
+        let special_type = u32::from_le_bytes(data[24..28].try_into().unwrap());
+        let (six_star, event) = match special_type {
+            1 => (true, false),
+            2 => (false, true),
+            _ => (false, false)
+        };
 
         if seed == 0 {
             return Raid::default();
         }
 
-        let mut rng = Xoroshiro128Plus::new(seed as u64);
-        let star_level_rand = rng.next_masked(100);
-
-        let star_level = if star_level_rand < 30 {
-            3
-        } else if star_level_rand < 70 {
-            4
+        let star_level = if six_star {
+            6
         } else {
-            5
+            let mut rng = Xoroshiro128Plus::new(seed as u64);
+            let star_level_rand = rng.next_masked(100);
+
+            if star_level_rand < 30 {
+                3
+            } else if star_level_rand < 70 {
+                4
+            } else {
+                5
+            }
         };
+
 
         let mut rng = Xoroshiro128Plus::new(seed as u64);
         let tera_type = rng.next_masked(18);
@@ -165,6 +180,7 @@ impl From<&[u8]> for Raid {
             ivs,
             tera_type: tera_type as u8,
             star_level: star_level as u8,
+            event,
         }
     }
 }

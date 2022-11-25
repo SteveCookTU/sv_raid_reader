@@ -16,12 +16,7 @@ fn main() {
         let data = client
             .pointer_peek(&RAID_BLOCK_POINTER, RAID_BLOCK_SIZE)
             .unwrap();
-        let six_star = &data[..0x20];
-        let mut raid: Raid = six_star.into();
-        raid.regenerate_ivs(6);
-        println!("{}", raid);
-        println!();
-        for offset in (0x20..RAID_BLOCK_SIZE).step_by(Raid::SIZE) {
+        for offset in (0..RAID_BLOCK_SIZE).step_by(Raid::SIZE) {
             let raid_data = &data[offset..(offset + Raid::SIZE)];
             let raid: Raid = raid_data.into();
             if raid.is_valid() {
