@@ -1,14 +1,12 @@
 use crate::personal_info::PersonalInfo;
 
 pub struct PersonalInfoSV {
-    data: Vec<u8>
+    data: Vec<u8>,
 }
 
 impl PersonalInfo for PersonalInfoSV {
     fn new(data: Vec<u8>) -> Self {
-        Self {
-            data
-        }
+        Self { data }
     }
 
     fn get_data(&self) -> &Vec<u8> {
@@ -116,7 +114,7 @@ impl PersonalInfo for PersonalInfoSV {
             0 => Some(self.ability_1()),
             1 => Some(self.ability_2()),
             2 => Some(self.ability_H()),
-            _ => None
+            _ => None,
         }
     }
 

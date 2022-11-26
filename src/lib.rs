@@ -4,12 +4,12 @@
 mod delivery_enemy_table_generated;
 mod delivery_raid_priority_generated;
 mod filter;
+mod personal_info;
+mod personal_info_sv;
+pub mod personal_table;
 mod raid;
 mod raid_enemy_table_01_generated;
 mod xoroshiro128plus;
-pub mod personal_table;
-mod personal_info;
-mod personal_info_sv;
 
 pub use personal_info::*;
 pub use personal_info_sv::*;

@@ -1,13 +1,12 @@
-use std::ops::Index;
-use lazy_static::lazy_static;
 use crate::personal_info::PersonalInfo;
 use crate::personal_info_sv::PersonalInfoSV;
+use lazy_static::lazy_static;
+use std::ops::Index;
 
 pub const PERSONAL_SV: &[u8] = include_bytes!("../resources/personal_array.bin");
 
 lazy_static! {
-    pub static ref SV: PersonalTable<PersonalInfoSV> =
-        PersonalTable::new(PERSONAL_SV);
+    pub static ref SV: PersonalTable<PersonalInfoSV> = PersonalTable::new(PERSONAL_SV);
 }
 
 pub struct PersonalTable<T: PersonalInfo> {
@@ -102,5 +101,4 @@ impl<T: PersonalInfo> PersonalTable<T> {
 
         result
     }
-
 }

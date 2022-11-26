@@ -39,7 +39,7 @@ enum TeraType {
     Ice,
     Dragon,
     Dark,
-    Fairy
+    Fairy,
 }
 
 fn main() {
