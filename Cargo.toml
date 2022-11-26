@@ -6,5 +6,13 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-sysbot_rs = { git = "https://github.com/SteveCookTU/sysbot_rs.git", rev = "dc9fe68" }
-clap = {version = "4.0.25", features = ['derive'] }
+sysbot_rs = { git = "https://github.com/SteveCookTU/sysbot_rs.git", rev = "dc9fe68", optional = true }
+clap = {version = "4.0.25", features = ['derive'], optional = true }
+flatbuffers = "22.9.29"
+
+[features]
+build-binary = ["clap", "sysbot_rs"]
+
+[[bin]]
+name = "sv_raid_reader"
+required-features = ["build-binary"]

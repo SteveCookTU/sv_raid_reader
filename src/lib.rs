@@ -1,4 +1,10 @@
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+mod delivery_enemy_table_generated;
+mod delivery_raid_priority_generated;
 mod raid;
+mod raid_enemy_table_01_generated;
 mod xoroshiro128plus;
 
 pub use raid::*;

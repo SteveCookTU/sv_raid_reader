@@ -1,9 +1,19 @@
-use crate::{Xoroshiro128Plus, TYPES};
+use crate::delivery_enemy_table_generated::root_as_delivery_raid_enemy_table_array;
+use crate::raid_enemy_table_01_generated::{root_as_raid_enemy_table_01_array, RaidRomType};
+use crate::{delivery_enemy_table_generated, Xoroshiro128Plus, TYPES};
 use std::fmt::{Display, Formatter};
 
 pub const RAID_BLOCK_POINTER: [u64; 3] = [0x42FD560, 0x160, 0x50];
 
 pub const RAID_BLOCK_SIZE: usize = 0xC80;
+
+pub const DIFFICULTY_01_RAW: &[u8] = include_bytes!("../resources/difficulty_01");
+pub const DIFFICULTY_02_RAW: &[u8] = include_bytes!("../resources/difficulty_02");
+pub const DIFFICULTY_03_RAW: &[u8] = include_bytes!("../resources/difficulty_03");
+pub const DIFFICULTY_04_RAW: &[u8] = include_bytes!("../resources/difficulty_04");
+pub const DIFFICULTY_05_RAW: &[u8] = include_bytes!("../resources/difficulty_05");
+pub const DIFFICULTY_06_RAW: &[u8] = include_bytes!("../resources/difficulty_06");
+pub const DELIVERY_RAW: &[u8] = include_bytes!("../resources/delivery_enemy_array");
 
 pub const AREAS: [&str; 22] = [
     "South Province (Area 1)",
@@ -39,11 +49,12 @@ pub struct Raid {
     seed: u32,
     ec: u32,
     pid: u32,
-    shiny: bool,
+    pub shiny: bool,
     ivs: [u8; 6],
-    tera_type: u8,
+    pub tera_type: u8,
     star_level: u8,
     event: bool,
+    encounter_slot: u32,
 }
 
 impl Display for Raid {
@@ -56,6 +67,7 @@ impl Display for Raid {
             if self.event { " (Event)" } else { "" }
         )?;
         writeln!(f, "Seed: {:0>8X}", self.seed)?;
+        writeln!(f, "Encounter Slot: {}", self.encounter_slot)?;
         writeln!(f, "EC: {:0>8X}", self.ec)?;
         writeln!(f, "PID: {:0>8X}", self.pid)?;
         writeln!(f, "IVs: {:?}", self.ivs)?;
@@ -107,8 +119,6 @@ impl Raid {
 
 impl From<&[u8]> for Raid {
     fn from(data: &[u8]) -> Self {
-
-        eprintln!("{:?}", data);
         let _unk1 = u32::from_le_bytes(data[0..4].try_into().unwrap());
         let area = u32::from_le_bytes(data[4..8].try_into().unwrap());
         let _unk_3 = u32::from_le_bytes(data[8..12].try_into().unwrap());
@@ -118,19 +128,22 @@ impl From<&[u8]> for Raid {
         let (six_star, event) = match special_type {
             1 => (true, false),
             2 => (false, true),
-            _ => (false, false)
+            _ => (false, false),
         };
 
         if seed == 0 {
             return Raid::default();
         }
 
-        let star_level = if six_star {
-            6
-        } else {
-            let mut rng = Xoroshiro128Plus::new(seed as u64);
-            let star_level_rand = rng.next_masked(100);
+        let mut rng = Xoroshiro128Plus::new(seed as u64);
 
+        let mut star_level = if six_star {
+            6
+        } else if event {
+            rng.next_masked(100);
+            7
+        } else {
+            let star_level_rand = rng.next_masked(100);
             if star_level_rand < 30 {
                 3
             } else if star_level_rand < 70 {
@@ -140,6 +153,85 @@ impl From<&[u8]> for Raid {
             }
         };
 
+        let encounter_slot = if event {
+            let table_array = root_as_delivery_raid_enemy_table_array(DELIVERY_RAW).unwrap();
+            let sum = table_array
+                .values()
+                .iter()
+                .filter_map(|s| {
+                    if s.raidEnemyInfo().romVer()
+                        == delivery_enemy_table_generated::RaidRomType::TYPE_A
+                        || s.raidEnemyInfo().difficulty() < 3
+                    {
+                        None
+                    } else {
+                        Some(s.raidEnemyInfo().rate() as u64)
+                    }
+                })
+                .sum::<u64>();
+            let mut slot_rand = rng.next_masked(sum);
+            let mut slot = 0;
+            for value in table_array.values().iter() {
+                if value.raidEnemyInfo().romVer()
+                    == delivery_enemy_table_generated::RaidRomType::TYPE_A
+                    || value.raidEnemyInfo().difficulty() < 3
+                {
+                    slot += 1;
+                    continue;
+                }
+                if value.raidEnemyInfo().rate() as u64 > slot_rand {
+                    star_level = value.raidEnemyInfo().difficulty() as u8;
+                    break;
+                } else {
+                    slot += 1;
+                    slot_rand -= value.raidEnemyInfo().rate() as u64;
+                }
+            }
+            slot
+        } else {
+            let table_array = match star_level {
+                3 => root_as_raid_enemy_table_01_array(DIFFICULTY_03_RAW).unwrap(),
+                4 => root_as_raid_enemy_table_01_array(DIFFICULTY_04_RAW).unwrap(),
+                5 => root_as_raid_enemy_table_01_array(DIFFICULTY_05_RAW).unwrap(),
+                _ => root_as_raid_enemy_table_01_array(DIFFICULTY_06_RAW).unwrap(),
+            };
+            let sum = table_array
+                .values()
+                .iter()
+                .filter_map(|s| {
+                    if s.raidEnemyInfo().romVer() == RaidRomType::TYPE_A {
+                        None
+                    } else {
+                        Some(s.raidEnemyInfo().rate() as u64)
+                    }
+                })
+                .sum::<u64>();
+            let mut slot_rand = rng.next_masked(sum);
+            let mut slot = 0;
+            for value in table_array.values().iter() {
+                if value.raidEnemyInfo().romVer() == RaidRomType::TYPE_A {
+                    slot += 1;
+                    continue;
+                }
+                if value.raidEnemyInfo().rate() as u64 > slot_rand {
+                    println!(
+                        "NUM: {} {}",
+                        value.raidEnemyInfo().no(),
+                        value
+                            .raidEnemyInfo()
+                            .bossPokePara()
+                            .devId()
+                            .variant_name()
+                            .unwrap()
+                    );
+                    break;
+                } else {
+                    slot += 1;
+                    slot_rand -= value.raidEnemyInfo().rate() as u64;
+                }
+            }
+            slot
+        };
 
         let mut rng = Xoroshiro128Plus::new(seed as u64);
         let tera_type = rng.next_masked(18);
@@ -179,8 +271,9 @@ impl From<&[u8]> for Raid {
             shiny,
             ivs,
             tera_type: tera_type as u8,
-            star_level: star_level as u8,
+            star_level,
             event,
+            encounter_slot,
         }
     }
 }
