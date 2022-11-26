@@ -9,6 +9,7 @@ edition = "2021"
 sysbot_rs = { git = "https://github.com/SteveCookTU/sysbot_rs.git", rev = "dc9fe68", optional = true }
 clap = {version = "4.0.25", features = ['derive'], optional = true }
 flatbuffers = "22.9.29"
+lazy_static = "1.4.0"
 
 [features]
 build-binary = ["clap", "sysbot_rs"]
