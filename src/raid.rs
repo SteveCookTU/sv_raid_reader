@@ -145,9 +145,9 @@ impl From<&[u8]> for Raid {
             7
         } else {
             let star_level_rand = rng.next_masked(100);
-            if star_level_rand < 30 {
+            if star_level_rand <= 30 {
                 3
-            } else if star_level_rand < 70 {
+            } else if star_level_rand <= 70 {
                 4
             } else {
                 5
