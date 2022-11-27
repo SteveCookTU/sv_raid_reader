@@ -48,16 +48,16 @@ pub const AREAS: [&str; 22] = [
 #[derive(Copy, Clone, Default, Debug)]
 pub struct Raid {
     _unk1: u32,
-    area: u32,
+    pub area: u32,
     _unk_3: u32,
-    den: u32,
-    seed: u32,
+    pub den: u32,
+    pub seed: u32,
     pub tera_type: u8,
-    star_level: u8,
-    event: bool,
-    species: u16,
-    form: u16,
-    pokemon: Pokemon,
+    pub star_level: u8,
+    pub event: bool,
+    pub species: u16,
+    pub form: u16,
+    pub pokemon: Pokemon,
 }
 
 impl Display for Raid {
@@ -343,13 +343,13 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
 
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Pokemon {
-    ec: u32,
-    pid: u32,
-    shiny: bool,
-    ivs: [u8; 6],
-    gender: u8,
-    ability: u8,
-    nature: u8,
+    pub ec: u32,
+    pub pid: u32,
+    pub shiny: bool,
+    pub ivs: [u8; 6],
+    pub gender: u8,
+    pub ability: u8,
+    pub nature: u8,
 }
 
 impl Pokemon {
