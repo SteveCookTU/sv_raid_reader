@@ -2,6 +2,8 @@ use crate::delivery_enemy_table_generated::root_as_delivery_raid_enemy_table_arr
 use crate::raid_enemy_table_01_generated::{root_as_raid_enemy_table_01_array, RaidRomType};
 use crate::{delivery_enemy_table_generated, personal_table, Filter, GameProgress, GameVersion, PersonalInfo, Xoroshiro128Plus, SPECIES, TYPES, ABILITIES, NATURES, GENDER_SYMBOLS};
 use std::fmt::{Display, Formatter};
+use std::fs::File;
+use std::io::Read;
 
 pub const RAID_BLOCK_POINTER: [u64; 3] = [0x42FD560, 0x160, 0x50];
 
@@ -253,7 +255,13 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
             GameVersion::Violet => delivery_enemy_table_generated::RaidRomType::TYPE_A,
         };
 
-        let table_array = root_as_delivery_raid_enemy_table_array(DELIVERY_RAW).unwrap();
+        let table_array = if let Ok(mut file) = File::open("./raid_enemy_array") {
+            let mut buf = Vec::new();
+            file.read_to_end(&mut buf);
+            root_as_delivery_raid_enemy_table_array(&buf).unwrap()
+        } else {
+            root_as_delivery_raid_enemy_table_array(DELIVERY_RAW).unwrap()
+        };
         let sum = table_array
             .values()
             .iter()
