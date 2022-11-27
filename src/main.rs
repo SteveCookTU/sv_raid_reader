@@ -1,17 +1,24 @@
 use clap::{Parser, ValueEnum};
-use sv_raid_reader::{Filter, Raid, RAID_BLOCK_POINTER, RAID_BLOCK_SIZE};
+use sv_raid_reader::{
+    personal_table, read_raids, Filter, GameProgress, GameVersion, PersonalInfo,
+    RAID_BLOCK_POINTER, RAID_BLOCK_SIZE,
+};
 use sysbot_rs::SysBotClient;
 
 #[derive(Parser)]
 struct Cli {
     ip: String,
+    #[arg(value_enum)]
+    game: Game,
+    #[arg(value_enum)]
+    progress: Progress,
     #[arg(default_value_t = 6000)]
     port: u16,
-    #[arg(short, long)]
+    #[arg(long)]
     species: Option<u16>,
-    #[arg(short, long, value_enum)]
+    #[arg(long, value_enum)]
     tera_type: Option<TeraType>,
-    #[arg(short, long)]
+    #[arg(long)]
     star_level: Option<u8>,
     #[arg(short, long)]
     shiny: bool,
@@ -42,6 +49,44 @@ enum TeraType {
     Fairy,
 }
 
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, ValueEnum)]
+#[repr(u8)]
+enum Game {
+    Scarlet,
+    Violet,
+}
+
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, ValueEnum)]
+#[repr(u8)]
+enum Progress {
+    None,
+    Badge3,
+    Badge7,
+    Credits,
+    PostGame,
+}
+
+impl Into<GameVersion> for Game {
+    fn into(self) -> GameVersion {
+        match self {
+            Game::Scarlet => GameVersion::Scarlet,
+            Game::Violet => GameVersion::Violet,
+        }
+    }
+}
+
+impl Into<GameProgress> for Progress {
+    fn into(self) -> GameProgress {
+        match self {
+            Progress::None => GameProgress::None,
+            Progress::Badge3 => GameProgress::Badge3,
+            Progress::Badge7 => GameProgress::Badge7,
+            Progress::Credits => GameProgress::Credits,
+            Progress::PostGame => GameProgress::PostGame,
+        }
+    }
+}
+
 fn main() {
     let cli: Cli = Cli::parse();
 
@@ -56,13 +101,10 @@ fn main() {
         let data = client
             .pointer_peek(&RAID_BLOCK_POINTER, RAID_BLOCK_SIZE)
             .unwrap();
-        for offset in (0..RAID_BLOCK_SIZE).step_by(Raid::SIZE) {
-            let raid_data = &data[offset..(offset + Raid::SIZE)];
-            let raid: Raid = raid_data.into();
-            if raid.is_valid() && raid.passes_filter(&filter) {
-                println!("{}", raid);
-                println!();
-            }
+        let raids = read_raids(&data, cli.game.into(), filter, cli.progress.into());
+        for raid in raids {
+            println!("{}", raid);
+            println!();
         }
     } else {
         println!("Unable to connect to {}:{}", cli.ip, cli.port);

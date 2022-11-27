@@ -24,6 +24,7 @@ const TYPES_RAW: &str = include_str!("../resources/types.txt");
 const MOVES_RAW: &str = include_str!("../resources/moves.txt");
 const ABILITIES_RAW: &str = include_str!("../resources/abilities.txt");
 const NATURES_RAW: &str = include_str!("../resources/natures.txt");
+pub const GENDER_SYMBOLS: [char; 3] = ['♂', '♀', '-'];
 
 lazy_static! {
     pub static ref SPECIES: Vec<&'static str> = load_string_list(SPECIES_RAW);
@@ -31,6 +32,53 @@ lazy_static! {
     pub static ref MOVES: Vec<&'static str> = load_string_list(MOVES_RAW);
     pub static ref ABILITIES: Vec<&'static str> = load_string_list(ABILITIES_RAW);
     pub static ref NATURES: Vec<&'static str> = load_string_list(NATURES_RAW);
+}
+
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub enum GameVersion {
+    Scarlet,
+    Violet,
+}
+
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub enum GameProgress {
+    None,
+    Badge3,
+    Badge7,
+    Credits,
+    PostGame,
+}
+
+impl GameProgress {
+    pub fn get_min_stars(&self) -> i32 {
+        match self {
+            GameProgress::None => 1,
+            GameProgress::Badge3 => 1,
+            GameProgress::Badge7 => 1,
+            GameProgress::Credits => 3,
+            GameProgress::PostGame => 3,
+        }
+    }
+
+    pub fn get_max_stars(&self) -> i32 {
+        match self {
+            GameProgress::None => 2,
+            GameProgress::Badge3 => 3,
+            GameProgress::Badge7 => 4,
+            GameProgress::Credits => 5,
+            GameProgress::PostGame => 5,
+        }
+    }
+
+    pub fn get_thresholds(&self) -> &'static [u8] {
+        match self {
+            GameProgress::None => &[80, 20],
+            GameProgress::Badge3 => &[30, 40, 30],
+            GameProgress::Badge7 => &[20, 20, 30, 30],
+            GameProgress::Credits => &[40, 35, 25],
+            GameProgress::PostGame => &[30, 40, 30],
+        }
+    }
 }
 
 fn load_string_list(list: &str) -> Vec<&str> {
@@ -45,4 +93,21 @@ fn load_string_list(list: &str) -> Vec<&str> {
             }
         })
         .collect()
+}
+
+pub fn read_raids(
+    data: &[u8],
+    game: GameVersion,
+    filter: Filter,
+    progress: GameProgress,
+) -> Vec<Raid> {
+    let mut raids = Vec::with_capacity(69);
+    for offset in (0..RAID_BLOCK_SIZE).step_by(Raid::SIZE) {
+        let raid_data = &data[offset..(offset + Raid::SIZE)];
+        let raid: Raid = (raid_data, game, progress).into();
+        if raid.is_valid() && raid.passes_filter(&filter) {
+            raids.push(raid);
+        }
+    }
+    raids
 }
