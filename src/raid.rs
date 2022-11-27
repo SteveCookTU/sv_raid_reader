@@ -1,6 +1,9 @@
 use crate::delivery_enemy_table_generated::root_as_delivery_raid_enemy_table_array;
 use crate::raid_enemy_table_01_generated::{root_as_raid_enemy_table_01_array, RaidRomType};
-use crate::{delivery_enemy_table_generated, personal_table, Filter, GameProgress, GameVersion, PersonalInfo, Xoroshiro128Plus, SPECIES, TYPES, ABILITIES, NATURES, GENDER_SYMBOLS};
+use crate::{
+    delivery_enemy_table_generated, personal_table, Filter, GameProgress, GameVersion,
+    PersonalInfo, Xoroshiro128Plus, ABILITIES, GENDER_SYMBOLS, NATURES, SPECIES, TYPES,
+};
 use std::fmt::{Display, Formatter};
 use std::fs::File;
 use std::io::Read;
@@ -60,7 +63,9 @@ pub struct Raid {
 impl Display for Raid {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         let personal = personal_table::SV.get_form_entry(self.species as usize, self.form as usize);
-        let ability = personal.get_ability_index((self.pokemon.ability - 1) as usize).unwrap();
+        let ability = personal
+            .get_ability_index((self.pokemon.ability - 1) as usize)
+            .unwrap();
         writeln!(
             f,
             "Area: {} Den: {}{}",
@@ -69,12 +74,22 @@ impl Display for Raid {
             if self.event { " (Event)" } else { "" }
         )?;
         writeln!(f, "Seed: {:0>8X}", self.seed)?;
-        writeln!(f, "Species: {} {}", SPECIES[self.species as usize].trim(), GENDER_SYMBOLS[self.pokemon.gender as usize])?;
+        writeln!(
+            f,
+            "Species: {} {}",
+            SPECIES[self.species as usize].trim(),
+            GENDER_SYMBOLS[self.pokemon.gender as usize]
+        )?;
         writeln!(f, "EC: {:0>8X}", self.pokemon.ec)?;
         writeln!(f, "PID: {:0>8X}", self.pokemon.pid)?;
         writeln!(f, "Shiny: {}", self.pokemon.shiny)?;
         writeln!(f, "IVs: {:?}", self.pokemon.ivs)?;
-        writeln!(f, "Ability: {} Nature: {}", ABILITIES[ability].trim(), NATURES[self.pokemon.nature as usize].trim())?;
+        writeln!(
+            f,
+            "Ability: {} Nature: {}",
+            ABILITIES[ability].trim(),
+            NATURES[self.pokemon.nature as usize].trim()
+        )?;
         write!(
             f,
             "{} Star {}-Tera",
@@ -249,14 +264,13 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
     let mut star_level = 0;
     rng.next_masked(100);
 
+    let mut buf = Vec::new();
     let slot_info = {
         let opposite_rom_type = match data.1 {
             GameVersion::Scarlet => delivery_enemy_table_generated::RaidRomType::TYPE_B,
             GameVersion::Violet => delivery_enemy_table_generated::RaidRomType::TYPE_A,
         };
-
         let table_array = if let Ok(mut file) = File::open("./raid_enemy_array") {
-            let mut buf = Vec::new();
             file.read_to_end(&mut buf);
             root_as_delivery_raid_enemy_table_array(&buf).unwrap()
         } else {
@@ -413,11 +427,41 @@ impl Pokemon {
 
 fn get_gender(ratio: u8, rand: u8) -> u8 {
     match ratio {
-        0x1F => if rand < 12 { 1 } else { 0 },
-        0x3F => if rand < 25 { 1 } else { 0 },
-        0x7F => if rand < 50 { 1 } else { 0 },
-        0xBF => if rand < 75 { 1 } else { 0 },
-        0xE1 => if rand < 89 { 1 } else { 0 }
-        _ => 0
+        0x1F => {
+            if rand < 12 {
+                1
+            } else {
+                0
+            }
+        }
+        0x3F => {
+            if rand < 25 {
+                1
+            } else {
+                0
+            }
+        }
+        0x7F => {
+            if rand < 50 {
+                1
+            } else {
+                0
+            }
+        }
+        0xBF => {
+            if rand < 75 {
+                1
+            } else {
+                0
+            }
+        }
+        0xE1 => {
+            if rand < 89 {
+                1
+            } else {
+                0
+            }
+        }
+        _ => 0,
     }
 }

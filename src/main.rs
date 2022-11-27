@@ -1,7 +1,6 @@
 use clap::{Parser, ValueEnum};
 use sv_raid_reader::{
-    personal_table, read_raids, Filter, GameProgress, GameVersion, PersonalInfo,
-    RAID_BLOCK_POINTER, RAID_BLOCK_SIZE,
+    read_raids, Filter, GameProgress, GameVersion, RAID_BLOCK_POINTER, RAID_BLOCK_SIZE,
 };
 use sysbot_rs::SysBotClient;
 
