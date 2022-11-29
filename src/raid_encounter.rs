@@ -1,26 +1,26 @@
 use crate::IvType::{VNum, Value};
 pub struct RaidEncounter {
-    species: u16,
-    level: u8,
-    difficulty: u8,
-    reusable_moves: [u16; 4],
-    gem_type: GemType,
-    tokusei: Tokusei,
-    flawless_ivs: u8,
-    iv_type: IvType,
-    ivs: [u8; 6],
-    evs: [u8; 6],
-    hp_coef: u16,
-    shield_hp_trigger: u8,
-    shield_time_trigger: u8,
-    shield_time_limit: u16,
-    shield_cancel_damage: u8,
-    shield_damage_rate: u8,
-    shield_gem_damage_rate: u8,
-    shield_change_gem_damage_rate: u8,
-    extra_actions: [ExtraAction; 6],
-    game_limit: u32,
-    command_limit: u32,
+    pub species: u16,
+    pub level: u8,
+    pub difficulty: u8,
+    pub reusable_moves: [u16; 4],
+    pub gem_type: GemType,
+    pub tokusei: Tokusei,
+    pub flawless_ivs: u8,
+    pub iv_type: IvType,
+    pub ivs: [u8; 6],
+    pub evs: [u8; 6],
+    pub hp_coef: u16,
+    pub shield_hp_trigger: u8,
+    pub shield_time_trigger: u8,
+    pub shield_time_limit: u16,
+    pub shield_cancel_damage: u8,
+    pub shield_damage_rate: u8,
+    pub shield_gem_damage_rate: u8,
+    pub shield_change_gem_damage_rate: u8,
+    pub extra_actions: [ExtraAction; 6],
+    pub game_limit: u32,
+    pub command_limit: u32,
 }
 
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
@@ -169,10 +169,10 @@ impl From<crate::delivery_enemy_table_generated::TalentType> for IvType {
 
 #[derive(Copy, Clone, Default)]
 pub struct ExtraAction {
-    trigger: ExtraActionTrigger,
-    action: ExtraActionType,
-    value: u16,
-    move_no: Option<u16>,
+    pub trigger: ExtraActionTrigger,
+    pub action: ExtraActionType,
+    pub value: u16,
+    pub move_no: Option<u16>,
 }
 
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
