@@ -2,8 +2,10 @@ use crate::delivery_enemy_table_generated::root_as_delivery_raid_enemy_table_arr
 use crate::raid_enemy_table_01_generated::{root_as_raid_enemy_table_01_array, RaidRomType};
 use crate::{
     delivery_enemy_table_generated, personal_table, Filter, GameProgress, GameVersion,
-    PersonalInfo, Xoroshiro128Plus, ABILITIES, GENDER_SYMBOLS, NATURES, SPECIES, TYPES,
+    PersonalInfo, RaidEncounter, Xoroshiro128Plus, ABILITIES, GENDER_SYMBOLS, NATURES, SPECIES,
+    TYPES,
 };
+use lazy_static::lazy_static;
 use std::fmt::{Display, Formatter};
 use std::fs::File;
 use std::io::Read;
@@ -19,6 +21,51 @@ pub const DIFFICULTY_04_RAW: &[u8] = include_bytes!("../resources/difficulty_04"
 pub const DIFFICULTY_05_RAW: &[u8] = include_bytes!("../resources/difficulty_05");
 pub const DIFFICULTY_06_RAW: &[u8] = include_bytes!("../resources/difficulty_06");
 pub const DELIVERY_RAW: &[u8] = include_bytes!("../resources/delivery_enemy_array");
+
+lazy_static! {
+    pub static ref DIFFICULTY_01: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(DIFFICULTY_01_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref DIFFICULTY_02: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(DIFFICULTY_02_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref DIFFICULTY_03: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(DIFFICULTY_03_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref DIFFICULTY_04: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(DIFFICULTY_04_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref DIFFICULTY_05: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(DIFFICULTY_05_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref DIFFICULTY_06: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(DIFFICULTY_06_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+}
 
 pub const AREAS: [&str; 22] = [
     "South Province (Area 1)",
@@ -178,6 +225,8 @@ impl From<(&[u8], GameVersion, GameProgress)> for Raid {
 
         let slot_info = {
             let table_array = match star_level {
+                1 => root_as_raid_enemy_table_01_array(DIFFICULTY_01_RAW).unwrap(),
+                2 => root_as_raid_enemy_table_01_array(DIFFICULTY_02_RAW).unwrap(),
                 3 => root_as_raid_enemy_table_01_array(DIFFICULTY_03_RAW).unwrap(),
                 4 => root_as_raid_enemy_table_01_array(DIFFICULTY_04_RAW).unwrap(),
                 5 => root_as_raid_enemy_table_01_array(DIFFICULTY_05_RAW).unwrap(),

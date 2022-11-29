@@ -8,11 +8,13 @@ mod personal_info;
 mod personal_info_sv;
 pub mod personal_table;
 mod raid;
+mod raid_encounter;
 mod raid_enemy_table_01_generated;
 mod xoroshiro128plus;
 
 pub use personal_info::*;
 pub use personal_info_sv::*;
+pub use raid_encounter::*;
 
 pub use filter::*;
 use lazy_static::lazy_static;
