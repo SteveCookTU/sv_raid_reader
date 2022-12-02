@@ -1,11 +1,15 @@
 use crate::IvType::{VNum, Value};
+
 pub struct RaidEncounter {
     pub species: u16,
     pub level: u8,
+    pub shiny: ShinyType,
     pub difficulty: u8,
     pub reusable_moves: [u16; 4],
     pub gem_type: GemType,
     pub tokusei: Tokusei,
+    pub seikaku: Seikaku,
+    pub gender: Gender,
     pub flawless_ivs: u8,
     pub iv_type: IvType,
     pub ivs: [u8; 6],
@@ -18,9 +22,40 @@ pub struct RaidEncounter {
     pub shield_damage_rate: u8,
     pub shield_gem_damage_rate: u8,
     pub shield_change_gem_damage_rate: u8,
+    pub second_shield_hp_trigger: u8,
+    pub second_shield_time_trigger: u8,
+    pub second_shield_damage_rate: u8,
     pub extra_actions: [ExtraAction; 6],
     pub game_limit: u32,
     pub command_limit: u32,
+}
+
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+pub enum ShinyType {
+    #[default]
+    Random,
+    No,
+    Yes,
+}
+
+impl From<crate::raid_enemy_table_01_generated::RareType> for ShinyType {
+    fn from(rare: crate::raid_enemy_table_01_generated::RareType) -> Self {
+        match rare.0 {
+            1 => ShinyType::No,
+            2 => ShinyType::Yes,
+            _ => ShinyType::Random,
+        }
+    }
+}
+
+impl From<crate::delivery_enemy_table_generated::RareType> for ShinyType {
+    fn from(rare: crate::delivery_enemy_table_generated::RareType) -> Self {
+        match rare.0 {
+            1 => ShinyType::No,
+            2 => ShinyType::Yes,
+            _ => ShinyType::Random,
+        }
+    }
 }
 
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
@@ -136,6 +171,109 @@ impl From<crate::delivery_enemy_table_generated::TokuseiType> for Tokusei {
             3 => Tokusei::Set2,
             4 => Tokusei::Set3,
             _ => Tokusei::Random12,
+        }
+    }
+}
+
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub enum Seikaku {
+    #[default]
+    Random,
+    Normal,
+    Fighting,
+    Flying,
+    Poison,
+    Ground,
+    Rock,
+    Bug,
+    Ghost,
+    Steel,
+    Fire,
+    Water,
+    Grass,
+    Electric,
+    Psychic,
+    Ice,
+    Dragon,
+    Dark,
+    Fairy,
+}
+
+impl From<crate::raid_enemy_table_01_generated::SeikakuType> for Seikaku {
+    fn from(seikaku: crate::raid_enemy_table_01_generated::SeikakuType) -> Self {
+        match seikaku.0 {
+            1 => Seikaku::Normal,
+            2 => Seikaku::Fighting,
+            3 => Seikaku::Flying,
+            4 => Seikaku::Poison,
+            5 => Seikaku::Ground,
+            6 => Seikaku::Rock,
+            7 => Seikaku::Bug,
+            8 => Seikaku::Ghost,
+            9 => Seikaku::Steel,
+            10 => Seikaku::Fire,
+            11 => Seikaku::Water,
+            12 => Seikaku::Grass,
+            13 => Seikaku::Electric,
+            14 => Seikaku::Psychic,
+            15 => Seikaku::Ice,
+            16 => Seikaku::Dragon,
+            17 => Seikaku::Dark,
+            18 => Seikaku::Fairy,
+            _ => Seikaku::Random,
+        }
+    }
+}
+
+impl From<crate::delivery_enemy_table_generated::SeikakuType> for Seikaku {
+    fn from(seikaku: crate::delivery_enemy_table_generated::SeikakuType) -> Self {
+        match seikaku.0 {
+            1 => Seikaku::Normal,
+            2 => Seikaku::Fighting,
+            3 => Seikaku::Flying,
+            4 => Seikaku::Poison,
+            5 => Seikaku::Ground,
+            6 => Seikaku::Rock,
+            7 => Seikaku::Bug,
+            8 => Seikaku::Ghost,
+            9 => Seikaku::Steel,
+            10 => Seikaku::Fire,
+            11 => Seikaku::Water,
+            12 => Seikaku::Grass,
+            13 => Seikaku::Electric,
+            14 => Seikaku::Psychic,
+            15 => Seikaku::Ice,
+            16 => Seikaku::Dragon,
+            17 => Seikaku::Dark,
+            18 => Seikaku::Fairy,
+            _ => Seikaku::Random,
+        }
+    }
+}
+
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub enum Gender {
+    Random,
+    Male,
+    Female,
+}
+
+impl From<crate::raid_enemy_table_01_generated::SexType> for Gender {
+    fn from(gender: crate::raid_enemy_table_01_generated::SexType) -> Self {
+        match gender.0 {
+            1 => Gender::Male,
+            2 => Gender::Female,
+            _ => Gender::Random,
+        }
+    }
+}
+
+impl From<crate::delivery_enemy_table_generated::SexType> for Gender {
+    fn from(gender: crate::delivery_enemy_table_generated::SexType) -> Self {
+        match gender.0 {
+            1 => Gender::Male,
+            2 => Gender::Female,
+            _ => Gender::Random,
         }
     }
 }
@@ -303,10 +441,13 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
         RaidEncounter {
             species: info.bossPokePara().devId().0,
             level: info.bossPokePara().level() as u8,
+            shiny: info.bossPokePara().rareType().into(),
             difficulty: (info.no() / 1000) as u8,
             reusable_moves: moves,
             gem_type: info.bossPokePara().gemType().into(),
             tokusei: info.bossPokePara().tokusei().into(),
+            seikaku: info.bossPokePara().seikaku().into(),
+            gender: info.bossPokePara().sex().into(),
             flawless_ivs: info.bossPokePara().talentVnum() as u8,
             iv_type: info.bossPokePara().talentType().into(),
             ivs,
@@ -319,6 +460,9 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
             shield_damage_rate: info.bossDesc().powerChargeDamageRate() as u8,
             shield_gem_damage_rate: info.bossDesc().powerChargeGemDamageRate() as u8,
             shield_change_gem_damage_rate: info.bossDesc().powerChargeChangeGemDamageRate() as u8,
+            second_shield_hp_trigger: info.bossDesc().doubleActionTrigerHp() as u8,
+            second_shield_time_trigger: info.bossDesc().doubleActionTrigerTime() as u8,
+            second_shield_damage_rate: info.bossDesc().doubleActionRate() as u8,
             extra_actions,
             game_limit: info.raidTimeData().gameLimit() as u32,
             command_limit: info.raidTimeData().commandLimit() as u32,
@@ -362,10 +506,13 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
         RaidEncounter {
             species: info.bossPokePara().devId().0,
             level: info.bossPokePara().level() as u8,
+            shiny: info.bossPokePara().rareType().into(),
             difficulty: info.difficulty() as u8,
             reusable_moves: moves,
             gem_type: info.bossPokePara().gemType().into(),
             tokusei: info.bossPokePara().tokusei().into(),
+            seikaku: info.bossPokePara().seikaku().into(),
+            gender: info.bossPokePara().sex().into(),
             flawless_ivs: info.bossPokePara().talentVnum() as u8,
             iv_type: info.bossPokePara().talentType().into(),
             ivs,
@@ -378,6 +525,9 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
             shield_damage_rate: info.bossDesc().powerChargeDamageRate() as u8,
             shield_gem_damage_rate: info.bossDesc().powerChargeGemDamageRate() as u8,
             shield_change_gem_damage_rate: info.bossDesc().powerChargeChangeGemDamageRate() as u8,
+            second_shield_hp_trigger: info.bossDesc().doubleActionTrigerHp() as u8,
+            second_shield_time_trigger: info.bossDesc().doubleActionTrigerTime() as u8,
+            second_shield_damage_rate: info.bossDesc().doubleActionRate() as u8,
             extra_actions,
             game_limit: info.raidTimeData().gameLimit() as u32,
             command_limit: info.raidTimeData().commandLimit() as u32,

@@ -10,6 +10,7 @@ use std::fmt::{Display, Formatter};
 use std::fs::File;
 use std::io::Read;
 
+//Deliver Group Priority [[[[main+43A7798]+08]+2C0]+10]+88
 pub const RAID_BLOCK_POINTER: [u64; 3] = [0x43A77C8, 0x160, 0x50];
 
 pub const RAID_BLOCK_SIZE: usize = 0xC80;
