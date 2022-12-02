@@ -303,6 +303,7 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
     let _unk_3 = u32::from_le_bytes(data.0[8..12].try_into().unwrap());
     let den = u32::from_le_bytes(data.0[12..16].try_into().unwrap());
     let seed = u32::from_le_bytes(data.0[16..20].try_into().unwrap());
+    let is_seven_star = u32::from_le_bytes(data.0[24..28].try_into().unwrap()) >= 3;
 
     if seed == 0 {
         return Raid::default();
@@ -325,38 +326,43 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
         } else {
             root_as_delivery_raid_enemy_table_array(DELIVERY_RAW).unwrap()
         };
-        let sum = table_array
-            .values()
-            .iter()
-            .filter_map(|s| {
-                if s.raidEnemyInfo().romVer() == opposite_rom_type
-                    || s.raidEnemyInfo().difficulty() < data.2.get_min_stars()
-                    || s.raidEnemyInfo().difficulty() > data.2.get_max_stars()
+        if is_seven_star {
+            star_level = 7;
+            table_array.values().iter().next().unwrap().raidEnemyInfo().clone()
+        } else {
+            let sum = table_array
+                .values()
+                .iter()
+                .filter_map(|s| {
+                    if s.raidEnemyInfo().romVer() == opposite_rom_type
+                        || s.raidEnemyInfo().difficulty() < data.2.get_min_stars()
+                        || s.raidEnemyInfo().difficulty() > data.2.get_max_stars()
+                    {
+                        None
+                    } else {
+                        Some(s.raidEnemyInfo().rate() as u64)
+                    }
+                })
+                .sum::<u64>();
+            let mut slot_rand = rng.next_masked(sum);
+            let mut slot_info: Option<delivery_enemy_table_generated::RaidEnemyInfo> = None;
+            for value in table_array.values().iter() {
+                if value.raidEnemyInfo().romVer() == opposite_rom_type
+                    || value.raidEnemyInfo().difficulty() < data.2.get_min_stars()
+                    || value.raidEnemyInfo().difficulty() > data.2.get_max_stars()
                 {
-                    None
-                } else {
-                    Some(s.raidEnemyInfo().rate() as u64)
+                    continue;
                 }
-            })
-            .sum::<u64>();
-        let mut slot_rand = rng.next_masked(sum);
-        let mut slot_info: Option<delivery_enemy_table_generated::RaidEnemyInfo> = None;
-        for value in table_array.values().iter() {
-            if value.raidEnemyInfo().romVer() == opposite_rom_type
-                || value.raidEnemyInfo().difficulty() < data.2.get_min_stars()
-                || value.raidEnemyInfo().difficulty() > data.2.get_max_stars()
-            {
-                continue;
+                if value.raidEnemyInfo().rate() as u64 > slot_rand {
+                    star_level = value.raidEnemyInfo().difficulty() as u8;
+                    slot_info = Some(value.raidEnemyInfo().clone());
+                    break;
+                } else {
+                    slot_rand -= value.raidEnemyInfo().rate() as u64;
+                }
             }
-            if value.raidEnemyInfo().rate() as u64 > slot_rand {
-                star_level = value.raidEnemyInfo().difficulty() as u8;
-                slot_info = Some(value.raidEnemyInfo().clone());
-                break;
-            } else {
-                slot_rand -= value.raidEnemyInfo().rate() as u64;
-            }
+            slot_info.unwrap()
         }
-        slot_info.unwrap()
     };
 
     let mut rng = Xoroshiro128Plus::new(seed as u64);
