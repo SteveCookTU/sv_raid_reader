@@ -271,8 +271,10 @@ impl From<(&[u8], GameVersion, GameProgress)> for Raid {
         let species = slot_info.bossPokePara().devId().0;
         let form = slot_info.bossPokePara().formId() as u16;
         let flawless_ivs = slot_info.bossPokePara().talentVnum() as u8;
+        let ivs = [slot_info.bossPokePara().talentValue().hp() as u8, slot_info.bossPokePara().talentValue().atk() as u8,slot_info.bossPokePara().talentValue().def() as u8,slot_info.bossPokePara().talentValue().spAtk() as u8,slot_info.bossPokePara().talentValue().spDef() as u8,slot_info.bossPokePara().talentValue().agi() as u8];
         let ability_param = slot_info.bossPokePara().tokusei().0 as u8;
         let gender_param = slot_info.bossPokePara().sex().0 as u8;
+        let nature_param = slot_info.bossPokePara().seikaku().0 as u8;
 
         Self {
             _unk1,
@@ -290,8 +292,10 @@ impl From<(&[u8], GameVersion, GameProgress)> for Raid {
                 species,
                 form,
                 flawless_ivs,
+                ivs,
                 ability_param,
                 gender_param,
+                nature_param
             ),
         }
     }
@@ -366,13 +370,23 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
     };
 
     let mut rng = Xoroshiro128Plus::new(seed as u64);
-    let tera_type = rng.next_masked(18);
+    let tera_type = if slot_info.bossPokePara().gemType() == delivery_enemy_table_generated::GemType::RANDOM || slot_info.bossPokePara().gemType() == delivery_enemy_table_generated::GemType::DEFAULT {
+        rng.next_masked(18) as u8
+    } else {
+        (slot_info.bossPokePara().gemType().0 - 2) as u8
+    };
 
     let species = slot_info.bossPokePara().devId().0;
     let form = slot_info.bossPokePara().formId() as u16;
-    let flawless_ivs = slot_info.bossPokePara().talentVnum() as u8;
+    let flawless_ivs = if slot_info.bossPokePara().talentType() == delivery_enemy_table_generated::TalentType::VALUE {
+        7
+    } else {
+        slot_info.bossPokePara().talentVnum() as u8
+    };
     let ability_param = slot_info.bossPokePara().tokusei().0 as u8;
     let gender_param = slot_info.bossPokePara().sex().0 as u8;
+    let nature_param = slot_info.bossPokePara().seikaku().0 as u8;
+    let ivs = [slot_info.bossPokePara().talentValue().hp() as u8, slot_info.bossPokePara().talentValue().atk() as u8,slot_info.bossPokePara().talentValue().def() as u8,slot_info.bossPokePara().talentValue().spAtk() as u8,slot_info.bossPokePara().talentValue().spDef() as u8,slot_info.bossPokePara().talentValue().agi() as u8];
 
     Raid {
         _unk1,
@@ -380,7 +394,7 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
         _unk_3,
         den,
         seed,
-        tera_type: tera_type as u8,
+        tera_type,
         star_level,
         event: true,
         species,
@@ -390,8 +404,10 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
             species,
             form,
             flawless_ivs,
+            ivs,
             ability_param,
             gender_param,
+            nature_param,
         ),
     }
 }
@@ -413,28 +429,31 @@ impl Pokemon {
         species: u16,
         form: u16,
         flawless_ivs: u8,
+        mut ivs: [u8; 6],
         ability_param: u8,
         gender_param: u8,
+        nature_param: u8,
     ) -> Self {
         let mut rng = Xoroshiro128Plus::new(seed as u64);
         let ec = rng.next_masked(0xFFFFFFFF) as u32;
         let tidsid = rng.next_masked(0xFFFFFFFF) as u32;
         let pid = rng.next_masked(0xFFFFFFFF) as u32;
         let shiny = (pid >> 16) ^ (pid & 0xFFFF) ^ (tidsid >> 16) ^ (tidsid & 0xFFFF) < 0x10;
-        let mut ivs = [0u8; 6];
 
-        for _ in 0..flawless_ivs {
-            let mut index;
-            while {
-                index = rng.next_masked(6) as usize;
-                ivs[index] != 0
-            } {}
-            ivs[index] = 31;
-        }
+        if flawless_ivs != 7 {
+            for _ in 0..flawless_ivs {
+                let mut index;
+                while {
+                    index = rng.next_masked(6) as usize;
+                    ivs[index] != 0
+                } {}
+                ivs[index] = 31;
+            }
 
-        for iv in &mut ivs {
-            if *iv == 0 {
-                *iv = rng.next_masked(32) as u8;
+            for iv in &mut ivs {
+                if *iv == 0 {
+                    *iv = rng.next_masked(32) as u8;
+                }
             }
         }
 
@@ -466,7 +485,11 @@ impl Pokemon {
             }
         };
 
-        let nature = rng.next_masked(25) as u8;
+        let nature = if nature_param == 0 {
+            rng.next_masked(25) as u8
+        } else {
+            nature_param - 1
+        };
 
         Self {
             ec,
