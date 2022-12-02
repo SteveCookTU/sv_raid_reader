@@ -175,7 +175,7 @@ impl From<crate::delivery_enemy_table_generated::TokuseiType> for Tokusei {
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
 pub enum Seikaku {
     #[default]
     Random,
