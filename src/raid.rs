@@ -271,7 +271,14 @@ impl From<(&[u8], GameVersion, GameProgress)> for Raid {
         let species = slot_info.bossPokePara().devId().0;
         let form = slot_info.bossPokePara().formId() as u16;
         let flawless_ivs = slot_info.bossPokePara().talentVnum() as u8;
-        let ivs = [slot_info.bossPokePara().talentValue().hp() as u8, slot_info.bossPokePara().talentValue().atk() as u8,slot_info.bossPokePara().talentValue().def() as u8,slot_info.bossPokePara().talentValue().spAtk() as u8,slot_info.bossPokePara().talentValue().spDef() as u8,slot_info.bossPokePara().talentValue().agi() as u8];
+        let ivs = [
+            slot_info.bossPokePara().talentValue().hp() as u8,
+            slot_info.bossPokePara().talentValue().atk() as u8,
+            slot_info.bossPokePara().talentValue().def() as u8,
+            slot_info.bossPokePara().talentValue().spAtk() as u8,
+            slot_info.bossPokePara().talentValue().spDef() as u8,
+            slot_info.bossPokePara().talentValue().agi() as u8,
+        ];
         let ability_param = slot_info.bossPokePara().tokusei().0 as u8;
         let gender_param = slot_info.bossPokePara().sex().0 as u8;
         let nature_param = slot_info.bossPokePara().seikaku().0 as u8;
@@ -295,7 +302,7 @@ impl From<(&[u8], GameVersion, GameProgress)> for Raid {
                 ivs,
                 ability_param,
                 gender_param,
-                nature_param
+                nature_param,
             ),
         }
     }
@@ -332,7 +339,13 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
         };
         if is_seven_star {
             star_level = 7;
-            table_array.values().iter().next().unwrap().raidEnemyInfo().clone()
+            table_array
+                .values()
+                .iter()
+                .next()
+                .unwrap()
+                .raidEnemyInfo()
+                .clone()
         } else {
             let sum = table_array
                 .values()
@@ -370,7 +383,10 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
     };
 
     let mut rng = Xoroshiro128Plus::new(seed as u64);
-    let tera_type = if slot_info.bossPokePara().gemType() == delivery_enemy_table_generated::GemType::RANDOM || slot_info.bossPokePara().gemType() == delivery_enemy_table_generated::GemType::DEFAULT {
+    let tera_type = if slot_info.bossPokePara().gemType()
+        == delivery_enemy_table_generated::GemType::RANDOM
+        || slot_info.bossPokePara().gemType() == delivery_enemy_table_generated::GemType::DEFAULT
+    {
         rng.next_masked(18) as u8
     } else {
         (slot_info.bossPokePara().gemType().0 - 2) as u8
@@ -378,7 +394,9 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
 
     let species = slot_info.bossPokePara().devId().0;
     let form = slot_info.bossPokePara().formId() as u16;
-    let flawless_ivs = if slot_info.bossPokePara().talentType() == delivery_enemy_table_generated::TalentType::VALUE {
+    let flawless_ivs = if slot_info.bossPokePara().talentType()
+        == delivery_enemy_table_generated::TalentType::VALUE
+    {
         7
     } else {
         slot_info.bossPokePara().talentVnum() as u8
@@ -386,7 +404,14 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
     let ability_param = slot_info.bossPokePara().tokusei().0 as u8;
     let gender_param = slot_info.bossPokePara().sex().0 as u8;
     let nature_param = slot_info.bossPokePara().seikaku().0 as u8;
-    let ivs = [slot_info.bossPokePara().talentValue().hp() as u8, slot_info.bossPokePara().talentValue().atk() as u8,slot_info.bossPokePara().talentValue().def() as u8,slot_info.bossPokePara().talentValue().spAtk() as u8,slot_info.bossPokePara().talentValue().spDef() as u8,slot_info.bossPokePara().talentValue().agi() as u8];
+    let ivs = [
+        slot_info.bossPokePara().talentValue().hp() as u8,
+        slot_info.bossPokePara().talentValue().atk() as u8,
+        slot_info.bossPokePara().talentValue().def() as u8,
+        slot_info.bossPokePara().talentValue().spAtk() as u8,
+        slot_info.bossPokePara().talentValue().spDef() as u8,
+        slot_info.bossPokePara().talentValue().agi() as u8,
+    ];
 
     Raid {
         _unk1,
