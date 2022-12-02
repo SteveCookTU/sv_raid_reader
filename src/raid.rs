@@ -10,7 +10,7 @@ use std::fmt::{Display, Formatter};
 use std::fs::File;
 use std::io::Read;
 
-pub const RAID_BLOCK_POINTER: [u64; 3] = [0x42FD560, 0x160, 0x50];
+pub const RAID_BLOCK_POINTER: [u64; 3] = [0x43A77C8, 0x160, 0x50];
 
 pub const RAID_BLOCK_SIZE: usize = 0xC80;
 
@@ -192,7 +192,7 @@ impl From<(&[u8], GameVersion, GameProgress)> for Raid {
         let seed = u32::from_le_bytes(data.0[16..20].try_into().unwrap());
         let special_type = u32::from_le_bytes(data.0[24..28].try_into().unwrap());
 
-        if special_type == 2 {
+        if special_type >= 2 {
             return generate_event(data);
         }
 
