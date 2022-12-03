@@ -30,6 +30,7 @@ const TYPES_RAW: &str = include_str!("../resources/types.txt");
 const MOVES_RAW: &str = include_str!("../resources/moves.txt");
 const ABILITIES_RAW: &str = include_str!("../resources/abilities.txt");
 const NATURES_RAW: &str = include_str!("../resources/natures.txt");
+const ITEMS_RAW: &str = include_str!("../resources/items.txt");
 pub const GENDER_SYMBOLS: [char; 3] = ['♂', '♀', '-'];
 
 lazy_static! {
@@ -38,6 +39,7 @@ lazy_static! {
     pub static ref MOVES: Vec<&'static str> = load_string_list(MOVES_RAW);
     pub static ref ABILITIES: Vec<&'static str> = load_string_list(ABILITIES_RAW);
     pub static ref NATURES: Vec<&'static str> = load_string_list(NATURES_RAW);
+    pub static ref ITEMS: Vec<&'static str> = load_string_list(ITEMS_RAW);
 }
 
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
