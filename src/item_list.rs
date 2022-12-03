@@ -27,7 +27,7 @@ pub struct Item {
 
 impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>> for ItemTable {
     fn from(items: crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>) -> Self {
-        let table = HashMap::new();
+        let mut table = HashMap::new();
         for value in items.values().iter() {
             let hash = value.table_name();
             let mut items = Vec::new();
@@ -166,6 +166,7 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     probability: 100.0,
                 });
             }
+            table.insert(hash, items);
         }
         Self(table)
     }
@@ -175,7 +176,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
     fn from(
         items: crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<'_>,
     ) -> Self {
-        let table = HashMap::new();
+        let mut table = HashMap::new();
         for value in items.values().iter() {
             let hash = value.table_name();
             let mut items = Vec::new();
@@ -481,6 +482,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     probability: f64::from(value.reward_item_29().rate()) / rate,
                 });
             }
+            table.insert(hash, items);
         }
         Self(table)
     }
