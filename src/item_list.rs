@@ -218,7 +218,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_00().itemID().0 as u16,
                     amount: value.reward_item_00().num() as u8,
-                    probability: f64::from(value.reward_item_00().rate()) / rate,
+                    probability: f64::from(value.reward_item_00().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_01().itemID()
@@ -227,7 +227,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_01().itemID().0 as u16,
                     amount: value.reward_item_01().num() as u8,
-                    probability: f64::from(value.reward_item_01().rate()) / rate,
+                    probability: f64::from(value.reward_item_01().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_02().itemID()
@@ -236,7 +236,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_02().itemID().0 as u16,
                     amount: value.reward_item_02().num() as u8,
-                    probability: f64::from(value.reward_item_02().rate()) / rate,
+                    probability: f64::from(value.reward_item_02().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_03().itemID()
@@ -245,7 +245,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_03().itemID().0 as u16,
                     amount: value.reward_item_03().num() as u8,
-                    probability: f64::from(value.reward_item_03().rate()) / rate,
+                    probability: f64::from(value.reward_item_03().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_04().itemID()
@@ -254,7 +254,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_04().itemID().0 as u16,
                     amount: value.reward_item_04().num() as u8,
-                    probability: f64::from(value.reward_item_04().rate()) / rate,
+                    probability: f64::from(value.reward_item_04().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_05().itemID()
@@ -263,7 +263,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_05().itemID().0 as u16,
                     amount: value.reward_item_05().num() as u8,
-                    probability: f64::from(value.reward_item_05().rate()) / rate,
+                    probability: f64::from(value.reward_item_05().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_06().itemID()
@@ -272,7 +272,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_06().itemID().0 as u16,
                     amount: value.reward_item_06().num() as u8,
-                    probability: f64::from(value.reward_item_06().rate()) / rate,
+                    probability: f64::from(value.reward_item_06().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_07().itemID()
@@ -281,7 +281,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_07().itemID().0 as u16,
                     amount: value.reward_item_07().num() as u8,
-                    probability: f64::from(value.reward_item_07().rate()) / rate,
+                    probability: f64::from(value.reward_item_07().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_08().itemID()
@@ -290,7 +290,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_08().itemID().0 as u16,
                     amount: value.reward_item_08().num() as u8,
-                    probability: f64::from(value.reward_item_08().rate()) / rate,
+                    probability: f64::from(value.reward_item_08().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_09().itemID()
@@ -299,7 +299,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_09().itemID().0 as u16,
                     amount: value.reward_item_09().num() as u8,
-                    probability: f64::from(value.reward_item_09().rate()) / rate,
+                    probability: f64::from(value.reward_item_09().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_10().itemID()
@@ -308,7 +308,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_10().itemID().0 as u16,
                     amount: value.reward_item_10().num() as u8,
-                    probability: f64::from(value.reward_item_10().rate()) / rate,
+                    probability: f64::from(value.reward_item_10().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_11().itemID()
@@ -317,7 +317,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_11().itemID().0 as u16,
                     amount: value.reward_item_11().num() as u8,
-                    probability: f64::from(value.reward_item_11().rate()) / rate,
+                    probability: f64::from(value.reward_item_11().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_12().itemID()
@@ -326,7 +326,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_12().itemID().0 as u16,
                     amount: value.reward_item_12().num() as u8,
-                    probability: f64::from(value.reward_item_12().rate()) / rate,
+                    probability: f64::from(value.reward_item_12().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_13().itemID()
@@ -335,7 +335,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_13().itemID().0 as u16,
                     amount: value.reward_item_13().num() as u8,
-                    probability: f64::from(value.reward_item_13().rate()) / rate,
+                    probability: f64::from(value.reward_item_13().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_14().itemID()
@@ -344,7 +344,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_14().itemID().0 as u16,
                     amount: value.reward_item_14().num() as u8,
-                    probability: f64::from(value.reward_item_14().rate()) / rate,
+                    probability: f64::from(value.reward_item_14().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_15().itemID()
@@ -353,7 +353,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_15().itemID().0 as u16,
                     amount: value.reward_item_15().num() as u8,
-                    probability: f64::from(value.reward_item_15().rate()) / rate,
+                    probability: f64::from(value.reward_item_15().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_16().itemID()
@@ -362,7 +362,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_16().itemID().0 as u16,
                     amount: value.reward_item_16().num() as u8,
-                    probability: f64::from(value.reward_item_16().rate()) / rate,
+                    probability: f64::from(value.reward_item_16().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_17().itemID()
@@ -371,7 +371,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_17().itemID().0 as u16,
                     amount: value.reward_item_17().num() as u8,
-                    probability: f64::from(value.reward_item_17().rate()) / rate,
+                    probability: f64::from(value.reward_item_17().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_18().itemID()
@@ -380,7 +380,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_18().itemID().0 as u16,
                     amount: value.reward_item_18().num() as u8,
-                    probability: f64::from(value.reward_item_18().rate()) / rate,
+                    probability: f64::from(value.reward_item_18().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_19().itemID()
@@ -389,7 +389,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_19().itemID().0 as u16,
                     amount: value.reward_item_19().num() as u8,
-                    probability: f64::from(value.reward_item_19().rate()) / rate,
+                    probability: f64::from(value.reward_item_19().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_20().itemID()
@@ -398,7 +398,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_20().itemID().0 as u16,
                     amount: value.reward_item_20().num() as u8,
-                    probability: f64::from(value.reward_item_20().rate()) / rate,
+                    probability: f64::from(value.reward_item_20().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_21().itemID()
@@ -407,7 +407,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_21().itemID().0 as u16,
                     amount: value.reward_item_21().num() as u8,
-                    probability: f64::from(value.reward_item_21().rate()) / rate,
+                    probability: f64::from(value.reward_item_21().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_22().itemID()
@@ -416,7 +416,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_22().itemID().0 as u16,
                     amount: value.reward_item_22().num() as u8,
-                    probability: f64::from(value.reward_item_22().rate()) / rate,
+                    probability: f64::from(value.reward_item_22().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_23().itemID()
@@ -425,7 +425,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_23().itemID().0 as u16,
                     amount: value.reward_item_23().num() as u8,
-                    probability: f64::from(value.reward_item_23().rate()) / rate,
+                    probability: f64::from(value.reward_item_23().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_24().itemID()
@@ -434,7 +434,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_24().itemID().0 as u16,
                     amount: value.reward_item_24().num() as u8,
-                    probability: f64::from(value.reward_item_24().rate()) / rate,
+                    probability: f64::from(value.reward_item_24().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_25().itemID()
@@ -443,7 +443,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_25().itemID().0 as u16,
                     amount: value.reward_item_25().num() as u8,
-                    probability: f64::from(value.reward_item_25().rate()) / rate,
+                    probability: f64::from(value.reward_item_25().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_26().itemID()
@@ -452,7 +452,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_26().itemID().0 as u16,
                     amount: value.reward_item_26().num() as u8,
-                    probability: f64::from(value.reward_item_26().rate()) / rate,
+                    probability: f64::from(value.reward_item_26().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_27().itemID()
@@ -461,7 +461,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_27().itemID().0 as u16,
                     amount: value.reward_item_27().num() as u8,
-                    probability: f64::from(value.reward_item_27().rate()) / rate,
+                    probability: f64::from(value.reward_item_27().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_28().itemID()
@@ -470,7 +470,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_28().itemID().0 as u16,
                     amount: value.reward_item_28().num() as u8,
-                    probability: f64::from(value.reward_item_28().rate()) / rate,
+                    probability: f64::from(value.reward_item_28().rate()) / rate * 100.0,
                 });
             }
             if value.reward_item_29().itemID()
@@ -479,7 +479,7 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                 items.push(Item {
                     id: value.reward_item_29().itemID().0 as u16,
                     amount: value.reward_item_29().num() as u8,
-                    probability: f64::from(value.reward_item_29().rate()) / rate,
+                    probability: f64::from(value.reward_item_29().rate()) / rate * 100.0,
                 });
             }
             table.insert(hash, items);
