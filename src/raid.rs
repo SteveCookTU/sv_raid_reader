@@ -334,7 +334,11 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
         };
         let table_array = if let Ok(mut file) = File::open("./raid_enemy_array") {
             file.read_to_end(&mut buf);
-            root_as_delivery_raid_enemy_table_array(&buf).unwrap()
+            if let Ok(table) = root_as_delivery_raid_enemy_table_array(&buf) {
+                table
+            } else {
+                root_as_delivery_raid_enemy_table_array(DELIVERY_RAW).unwrap()
+            }
         } else {
             root_as_delivery_raid_enemy_table_array(DELIVERY_RAW).unwrap()
         };
