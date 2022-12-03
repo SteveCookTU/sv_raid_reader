@@ -28,6 +28,8 @@ pub struct RaidEncounter {
     pub extra_actions: [ExtraAction; 6],
     pub game_limit: u32,
     pub command_limit: u32,
+    pub fixed_item_table: u64,
+    pub lottery_item_table: u64,
 }
 
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
@@ -466,6 +468,8 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
             extra_actions,
             game_limit: info.raidTimeData().gameLimit() as u32,
             command_limit: info.raidTimeData().commandLimit() as u32,
+            fixed_item_table: info.dropTableFix(),
+            lottery_item_table: info.dropTableRandom(),
         }
     }
 }
@@ -531,6 +535,8 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
             extra_actions,
             game_limit: info.raidTimeData().gameLimit() as u32,
             command_limit: info.raidTimeData().commandLimit() as u32,
+            fixed_item_table: info.dropTableFix(),
+            lottery_item_table: info.dropTableRandom(),
         }
     }
 }
