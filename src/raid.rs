@@ -333,7 +333,7 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
             GameVersion::Violet => delivery_enemy_table_generated::RaidRomType::TYPE_A,
         };
         let table_array = if let Ok(mut file) = File::open("./raid_enemy_array") {
-            file.read_to_end(&mut buf);
+            file.read_to_end(&mut buf).unwrap();
             if let Ok(table) = root_as_delivery_raid_enemy_table_array(&buf) {
                 table
             } else {
@@ -366,6 +366,9 @@ fn generate_event(data: (&[u8], GameVersion, GameProgress)) -> Raid {
                     }
                 })
                 .sum::<u64>();
+            if sum == 0 {
+                return Raid::default();
+            }
             let mut slot_rand = rng.next_masked(sum);
             let mut slot_info: Option<delivery_enemy_table_generated::RaidEnemyInfo> = None;
             for value in table_array.values().iter() {
@@ -471,15 +474,16 @@ impl Pokemon {
         let shiny = (pid >> 16) ^ (pid & 0xFFFF) ^ (tidsid >> 16) ^ (tidsid & 0xFFFF) < 0x10;
 
         if flawless_ivs != 7 {
-            for _ in 0..flawless_ivs {
-                let mut index;
-                while {
-                    index = rng.next_masked(6) as usize;
-                    ivs[index] != 0
-                } {}
-                ivs[index] = 31;
+            if flawless_ivs != 0 {
+                for _ in 0..flawless_ivs {
+                    let mut index;
+                    while {
+                        index = rng.next_masked(6) as usize;
+                        ivs[index] != 0
+                    } {}
+                    ivs[index] = 31;
+                }
             }
-
             for iv in &mut ivs {
                 if *iv == 0 {
                     *iv = rng.next_masked(32) as u8;
