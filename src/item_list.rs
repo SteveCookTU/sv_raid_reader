@@ -39,12 +39,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_00().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_00().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_00().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_00().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_00().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_01().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_01().itemID().0 as u16,
+                    amount: value.reward_item_01().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_01().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_01().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_01().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_01().num() as u8,
                     probability: 100.0,
                 });
@@ -57,12 +89,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_02().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_02().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_02().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_02().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_02().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_03().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_03().itemID().0 as u16,
+                    amount: value.reward_item_03().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_03().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_03().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_03().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_03().num() as u8,
                     probability: 100.0,
                 });
@@ -75,12 +139,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_04().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_04().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_04().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_04().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_04().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_05().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_05().itemID().0 as u16,
+                    amount: value.reward_item_05().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_05().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_05().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_05().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_05().num() as u8,
                     probability: 100.0,
                 });
@@ -93,12 +189,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_06().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_06().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_06().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_06().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_06().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_07().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_07().itemID().0 as u16,
+                    amount: value.reward_item_07().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_07().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_07().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_07().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_07().num() as u8,
                     probability: 100.0,
                 });
@@ -111,12 +239,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_08().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_08().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_08().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_08().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_08().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_09().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_09().itemID().0 as u16,
+                    amount: value.reward_item_09().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_09().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_09().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_09().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_09().num() as u8,
                     probability: 100.0,
                 });
@@ -129,12 +289,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_10().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_10().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_10().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_10().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_10().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_11().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_11().itemID().0 as u16,
+                    amount: value.reward_item_11().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_11().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_11().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_11().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_11().num() as u8,
                     probability: 100.0,
                 });
@@ -147,6 +339,22 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_12().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_12().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_12().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_12().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_12().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_13().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
@@ -156,12 +364,44 @@ impl From<crate::raid_fixed_reward_item_generated::RaidFixedRewardItemArray<'_>>
                     amount: value.reward_item_13().num() as u8,
                     probability: 100.0,
                 });
+            } else if value.reward_item_13().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_13().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_13().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_13().num() as u8,
+                    probability: 100.0,
+                });
             }
             if value.reward_item_14().itemID()
                 != crate::raid_fixed_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_14().itemID().0 as u16,
+                    amount: value.reward_item_14().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_14().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_14().num() as u8,
+                    probability: 100.0,
+                });
+            } else if value.reward_item_14().category()
+                == crate::raid_fixed_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_14().num() as u8,
                     probability: 100.0,
                 });
@@ -220,12 +460,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_00().num() as u8,
                     probability: f64::from(value.reward_item_00().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_00().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_00().num() as u8,
+                    probability: f64::from(value.reward_item_00().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_00().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_00().num() as u8,
+                    probability: f64::from(value.reward_item_00().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_01().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_01().itemID().0 as u16,
+                    amount: value.reward_item_01().num() as u8,
+                    probability: f64::from(value.reward_item_01().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_01().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_01().num() as u8,
+                    probability: f64::from(value.reward_item_01().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_01().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_01().num() as u8,
                     probability: f64::from(value.reward_item_01().rate()) / rate * 100.0,
                 });
@@ -238,12 +510,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_02().num() as u8,
                     probability: f64::from(value.reward_item_02().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_02().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_02().num() as u8,
+                    probability: f64::from(value.reward_item_02().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_02().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_02().num() as u8,
+                    probability: f64::from(value.reward_item_02().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_03().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_03().itemID().0 as u16,
+                    amount: value.reward_item_03().num() as u8,
+                    probability: f64::from(value.reward_item_03().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_03().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_03().num() as u8,
+                    probability: f64::from(value.reward_item_03().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_03().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_03().num() as u8,
                     probability: f64::from(value.reward_item_03().rate()) / rate * 100.0,
                 });
@@ -256,12 +560,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_04().num() as u8,
                     probability: f64::from(value.reward_item_04().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_04().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_04().num() as u8,
+                    probability: f64::from(value.reward_item_04().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_04().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_04().num() as u8,
+                    probability: f64::from(value.reward_item_04().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_05().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_05().itemID().0 as u16,
+                    amount: value.reward_item_05().num() as u8,
+                    probability: f64::from(value.reward_item_05().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_05().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_05().num() as u8,
+                    probability: f64::from(value.reward_item_05().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_05().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_05().num() as u8,
                     probability: f64::from(value.reward_item_05().rate()) / rate * 100.0,
                 });
@@ -274,12 +610,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_06().num() as u8,
                     probability: f64::from(value.reward_item_06().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_06().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_06().num() as u8,
+                    probability: f64::from(value.reward_item_06().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_06().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_06().num() as u8,
+                    probability: f64::from(value.reward_item_06().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_07().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_07().itemID().0 as u16,
+                    amount: value.reward_item_07().num() as u8,
+                    probability: f64::from(value.reward_item_07().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_07().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_07().num() as u8,
+                    probability: f64::from(value.reward_item_07().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_07().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_07().num() as u8,
                     probability: f64::from(value.reward_item_07().rate()) / rate * 100.0,
                 });
@@ -292,12 +660,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_08().num() as u8,
                     probability: f64::from(value.reward_item_08().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_08().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_08().num() as u8,
+                    probability: f64::from(value.reward_item_08().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_08().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_08().num() as u8,
+                    probability: f64::from(value.reward_item_08().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_09().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_09().itemID().0 as u16,
+                    amount: value.reward_item_09().num() as u8,
+                    probability: f64::from(value.reward_item_09().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_09().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_09().num() as u8,
+                    probability: f64::from(value.reward_item_09().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_09().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_09().num() as u8,
                     probability: f64::from(value.reward_item_09().rate()) / rate * 100.0,
                 });
@@ -310,12 +710,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_10().num() as u8,
                     probability: f64::from(value.reward_item_10().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_10().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_10().num() as u8,
+                    probability: f64::from(value.reward_item_10().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_10().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_10().num() as u8,
+                    probability: f64::from(value.reward_item_10().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_11().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_11().itemID().0 as u16,
+                    amount: value.reward_item_11().num() as u8,
+                    probability: f64::from(value.reward_item_11().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_11().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_11().num() as u8,
+                    probability: f64::from(value.reward_item_11().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_11().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_11().num() as u8,
                     probability: f64::from(value.reward_item_11().rate()) / rate * 100.0,
                 });
@@ -328,12 +760,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_12().num() as u8,
                     probability: f64::from(value.reward_item_12().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_12().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_12().num() as u8,
+                    probability: f64::from(value.reward_item_12().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_12().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_12().num() as u8,
+                    probability: f64::from(value.reward_item_12().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_13().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_13().itemID().0 as u16,
+                    amount: value.reward_item_13().num() as u8,
+                    probability: f64::from(value.reward_item_13().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_13().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_13().num() as u8,
+                    probability: f64::from(value.reward_item_13().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_13().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_13().num() as u8,
                     probability: f64::from(value.reward_item_13().rate()) / rate * 100.0,
                 });
@@ -346,12 +810,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_14().num() as u8,
                     probability: f64::from(value.reward_item_14().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_14().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_14().num() as u8,
+                    probability: f64::from(value.reward_item_14().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_14().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_14().num() as u8,
+                    probability: f64::from(value.reward_item_14().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_15().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_15().itemID().0 as u16,
+                    amount: value.reward_item_15().num() as u8,
+                    probability: f64::from(value.reward_item_15().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_15().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_15().num() as u8,
+                    probability: f64::from(value.reward_item_15().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_15().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_15().num() as u8,
                     probability: f64::from(value.reward_item_15().rate()) / rate * 100.0,
                 });
@@ -364,12 +860,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_16().num() as u8,
                     probability: f64::from(value.reward_item_16().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_16().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_16().num() as u8,
+                    probability: f64::from(value.reward_item_16().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_16().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_16().num() as u8,
+                    probability: f64::from(value.reward_item_16().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_17().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_17().itemID().0 as u16,
+                    amount: value.reward_item_17().num() as u8,
+                    probability: f64::from(value.reward_item_17().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_17().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_17().num() as u8,
+                    probability: f64::from(value.reward_item_17().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_17().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_17().num() as u8,
                     probability: f64::from(value.reward_item_17().rate()) / rate * 100.0,
                 });
@@ -382,12 +910,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_18().num() as u8,
                     probability: f64::from(value.reward_item_18().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_18().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_18().num() as u8,
+                    probability: f64::from(value.reward_item_18().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_18().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_18().num() as u8,
+                    probability: f64::from(value.reward_item_18().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_19().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_19().itemID().0 as u16,
+                    amount: value.reward_item_19().num() as u8,
+                    probability: f64::from(value.reward_item_19().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_19().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_19().num() as u8,
+                    probability: f64::from(value.reward_item_19().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_19().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_19().num() as u8,
                     probability: f64::from(value.reward_item_19().rate()) / rate * 100.0,
                 });
@@ -400,12 +960,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_20().num() as u8,
                     probability: f64::from(value.reward_item_20().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_20().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_20().num() as u8,
+                    probability: f64::from(value.reward_item_20().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_20().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_20().num() as u8,
+                    probability: f64::from(value.reward_item_20().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_21().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_21().itemID().0 as u16,
+                    amount: value.reward_item_21().num() as u8,
+                    probability: f64::from(value.reward_item_21().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_21().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_21().num() as u8,
+                    probability: f64::from(value.reward_item_21().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_21().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_21().num() as u8,
                     probability: f64::from(value.reward_item_21().rate()) / rate * 100.0,
                 });
@@ -418,12 +1010,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_22().num() as u8,
                     probability: f64::from(value.reward_item_22().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_22().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_22().num() as u8,
+                    probability: f64::from(value.reward_item_22().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_22().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_22().num() as u8,
+                    probability: f64::from(value.reward_item_22().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_23().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_23().itemID().0 as u16,
+                    amount: value.reward_item_23().num() as u8,
+                    probability: f64::from(value.reward_item_23().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_23().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_23().num() as u8,
+                    probability: f64::from(value.reward_item_23().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_23().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_23().num() as u8,
                     probability: f64::from(value.reward_item_23().rate()) / rate * 100.0,
                 });
@@ -436,12 +1060,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_24().num() as u8,
                     probability: f64::from(value.reward_item_24().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_24().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_24().num() as u8,
+                    probability: f64::from(value.reward_item_24().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_24().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_24().num() as u8,
+                    probability: f64::from(value.reward_item_24().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_25().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_25().itemID().0 as u16,
+                    amount: value.reward_item_25().num() as u8,
+                    probability: f64::from(value.reward_item_25().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_25().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_25().num() as u8,
+                    probability: f64::from(value.reward_item_25().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_25().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_25().num() as u8,
                     probability: f64::from(value.reward_item_25().rate()) / rate * 100.0,
                 });
@@ -454,12 +1110,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_26().num() as u8,
                     probability: f64::from(value.reward_item_26().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_26().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_26().num() as u8,
+                    probability: f64::from(value.reward_item_26().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_26().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_26().num() as u8,
+                    probability: f64::from(value.reward_item_26().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_27().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_27().itemID().0 as u16,
+                    amount: value.reward_item_27().num() as u8,
+                    probability: f64::from(value.reward_item_27().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_27().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_27().num() as u8,
+                    probability: f64::from(value.reward_item_27().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_27().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_27().num() as u8,
                     probability: f64::from(value.reward_item_27().rate()) / rate * 100.0,
                 });
@@ -472,12 +1160,44 @@ impl From<crate::raid_lottery_reward_item_generated::RaidLotteryRewardItemArray<
                     amount: value.reward_item_28().num() as u8,
                     probability: f64::from(value.reward_item_28().rate()) / rate * 100.0,
                 });
+            } else if value.reward_item_28().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_28().num() as u8,
+                    probability: f64::from(value.reward_item_28().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_28().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
+                    amount: value.reward_item_28().num() as u8,
+                    probability: f64::from(value.reward_item_28().rate()) / rate * 100.0,
+                });
             }
             if value.reward_item_29().itemID()
                 != crate::raid_lottery_reward_item_generated::ItemID::ITEMID_NONE
             {
                 items.push(Item {
                     id: value.reward_item_29().itemID().0 as u16,
+                    amount: value.reward_item_29().num() as u8,
+                    probability: f64::from(value.reward_item_29().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_29().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::GEM
+            {
+                items.push(Item {
+                    id: u16::MAX - 1,
+                    amount: value.reward_item_29().num() as u8,
+                    probability: f64::from(value.reward_item_29().rate()) / rate * 100.0,
+                });
+            } else if value.reward_item_29().category()
+                == crate::raid_lottery_reward_item_generated::RaidRewardItemCategoryType::POKE
+            {
+                items.push(Item {
+                    id: u16::MAX,
                     amount: value.reward_item_29().num() as u8,
                     probability: f64::from(value.reward_item_29().rate()) / rate * 100.0,
                 });
