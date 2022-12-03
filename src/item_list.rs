@@ -2,7 +2,7 @@ use crate::{raid_fixed_reward_item_generated, raid_lottery_reward_item_generated
 use lazy_static::lazy_static;
 use std::collections::HashMap;
 
-pub struct ItemTable(HashMap<u64, Vec<Item>>);
+pub struct ItemTable(pub HashMap<u64, Vec<Item>>);
 
 const FIXED_RAW: &[u8] = include_bytes!("../resources/raid_fixed_reward_item.bin");
 const LOTTERY_RAW: &[u8] = include_bytes!("../resources/raid_lottery_reward_item.bin");
