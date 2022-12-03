@@ -4,14 +4,18 @@
 pub mod delivery_enemy_table_generated;
 pub mod delivery_raid_priority_generated;
 mod filter;
+mod item_list;
 mod personal_info;
 mod personal_info_sv;
 pub mod personal_table;
 mod raid;
 mod raid_encounter;
 pub mod raid_enemy_table_01_generated;
+pub mod raid_fixed_reward_item_generated;
+pub mod raid_lottery_reward_item_generated;
 mod xoroshiro128plus;
 
+pub use item_list::*;
 pub use personal_info::*;
 pub use personal_info_sv::*;
 pub use raid_encounter::*;
