@@ -2,6 +2,7 @@ use crate::IvType::{VNum, Value};
 
 pub struct RaidEncounter {
     pub species: u16,
+    pub form: u8,
     pub level: u8,
     pub shiny: ShinyType,
     pub difficulty: u8,
@@ -442,6 +443,7 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
 
         RaidEncounter {
             species: info.bossPokePara().devId().0,
+            form: info.bossPokePara().formId() as u8,
             level: info.bossPokePara().level() as u8,
             shiny: info.bossPokePara().rareType().into(),
             difficulty: (info.no() / 1000) as u8,
@@ -509,6 +511,7 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
 
         RaidEncounter {
             species: info.bossPokePara().devId().0,
+            form: info.bossPokePara().formId() as u8,
             level: info.bossPokePara().level() as u8,
             shiny: info.bossPokePara().rareType().into(),
             difficulty: info.difficulty() as u8,
