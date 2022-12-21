@@ -85,6 +85,10 @@ impl PersonalInfo for PersonalInfoSV {
         self.data[8] as usize
     }
 
+    fn get_evo_stage(&self) -> usize {
+        self.data[9] as usize
+    }
+
     fn get_items(&self) -> Vec<usize> {
         todo!()
     }
@@ -122,16 +126,20 @@ impl PersonalInfo for PersonalInfoSV {
         todo!()
     }
 
+    fn get_form_count(&self) -> usize {
+        self.data[0x1A] as usize
+    }
+
+    fn get_form_stats_index(&self) -> usize {
+        u16::from_le_bytes(self.data[0x18..0x1A].try_into().unwrap()) as usize
+    }
+
     fn get_base_exp(&self) -> usize {
         todo!()
     }
 
     fn get_color(&self) -> usize {
         todo!()
-    }
-
-    fn get_evo_stage(&self) -> usize {
-        self.data[9] as usize
     }
 }
 
