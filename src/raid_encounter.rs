@@ -1,5 +1,6 @@
 use crate::IvType::{VNum, Value};
 
+#[derive(Copy, Clone)]
 pub struct RaidEncounter {
     pub species: u16,
     pub form: u8,
