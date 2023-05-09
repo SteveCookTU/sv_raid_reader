@@ -464,7 +464,7 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
         extra_actions[5] = info.bossDesc().extraAction6().into();
 
         RaidEncounter {
-            species: info.bossPokePara().devId().0,
+            species: dev_id_to_species(info.bossPokePara().devId().0),
             form: info.bossPokePara().formId() as u8,
             level: info.bossPokePara().level() as u8,
             shiny: info.bossPokePara().rareType().into(),
@@ -532,7 +532,7 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
         extra_actions[5] = info.bossDesc().extraAction6().into();
 
         RaidEncounter {
-            species: info.bossPokePara().devId().0,
+            species: dev_id_to_species(info.bossPokePara().devId().0),
             form: info.bossPokePara().formId() as u8,
             level: info.bossPokePara().level() as u8,
             shiny: info.bossPokePara().rareType().into(),
@@ -565,3 +565,26 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
         }
     }
 }
+
+fn dev_id_to_species(dev_id: u16) -> u16 {
+    let shifted = dev_id.wrapping_sub(917) as usize; // Dudunsparce
+    if shifted >= DEV_ID_TO_SPECIES_DIFF.len() {
+        dev_id
+    } else {
+        (dev_id as i16 + DEV_ID_TO_SPECIES_DIFF[shifted]) as u16
+    }
+}
+
+const DEV_ID_TO_SPECIES_DIFF: [i16; 94] = [
+    65, -1, -1,
+    -1, -1, 31, 31, 47, 47, 29, 29, 53, 31,
+    31, 46, 44, 30, 30, -7, -7, -7, 13, 13,
+    -2, -2, 23, 23, 24, -21, -21, 27, 27, 47,
+    47, 47, 26, 14, -33, -33, -33, -17, -17, 3,
+    -29, 12, -12, -31, -31, -31, 3, 3, -24, -24,
+    -44, -44, -30, -30, -28, -28, 23, 23, 6, 7,
+    29, 8, 3, 4, 4, 20, 4, 23, 6, 3,
+    3, 4, -1, 13, 9, 7, 5, 7, 9, 9,
+    -43, -43, -43, -68, -68, -68, -58, -58, -25, -29,
+    -31,
+];
