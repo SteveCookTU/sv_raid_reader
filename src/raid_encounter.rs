@@ -2,6 +2,7 @@ use crate::IvType::{VNum, Value};
 
 #[derive(Copy, Clone)]
 pub struct RaidEncounter {
+    pub dev_id: u16,
     pub species: u16,
     pub form: u8,
     pub level: u8,
@@ -464,6 +465,7 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
         extra_actions[5] = info.bossDesc().extraAction6().into();
 
         RaidEncounter {
+            dev_id: info.bossPokePara().devId().0,
             species: dev_id_to_species(info.bossPokePara().devId().0),
             form: info.bossPokePara().formId() as u8,
             level: info.bossPokePara().level() as u8,
@@ -532,6 +534,7 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
         extra_actions[5] = info.bossDesc().extraAction6().into();
 
         RaidEncounter {
+            dev_id: info.bossPokePara().devId().0,
             species: dev_id_to_species(info.bossPokePara().devId().0),
             form: info.bossPokePara().formId() as u8,
             level: info.bossPokePara().level() as u8,
