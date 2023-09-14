@@ -24,10 +24,10 @@ impl<T: PersonalInfo> Index<usize> for PersonalTable<T> {
 
 impl<T: PersonalInfo> PersonalTable<T> {
     pub fn new(data: &[u8]) -> Self {
-        let count = data.len() / 0x46;
+        let count = data.len() / 0x4E;
         let mut table = Vec::with_capacity(count);
         for i in 0..count {
-            table.push(T::new((data[(0x46 * i)..((0x46 * i) + 0x46)]).to_vec()))
+            table.push(T::new((data[(0x4E * i)..((0x4E * i) + 0x4E)]).to_vec()))
         }
         Self {
             table,
