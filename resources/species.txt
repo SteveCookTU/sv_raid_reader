@@ -1009,12 +1009,13 @@ Koraidon
 Miraidon
 Walking Wake
 Iron Leaves
-Ogerpon
 Dipplin
-
+Poltchageist
+Sinistcha
 Okidogi
 Munkidori
 Fezandipiti
+Ogerpon
 
 
 
@@ -1022,5 +1023,4 @@ Fezandipiti
 
 
 
-Poltchageist
-Sinistcha
+
