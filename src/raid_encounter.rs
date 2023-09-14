@@ -1,6 +1,6 @@
 use crate::IvType::{VNum, Value};
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct RaidEncounter {
     pub dev_id: u16,
     pub species: u16,
@@ -35,7 +35,7 @@ pub struct RaidEncounter {
     pub lottery_item_table: u64,
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default, Debug)]
 pub enum ShinyType {
     #[default]
     Random,
@@ -63,7 +63,7 @@ impl From<crate::delivery_enemy_table_generated::RareType> for ShinyType {
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default, Debug)]
 pub enum GemType {
     Normal,
     Fighting,
@@ -147,7 +147,7 @@ impl From<crate::delivery_enemy_table_generated::GemType> for GemType {
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub enum Tokusei {
     Random12,
     Random123,
@@ -180,7 +180,7 @@ impl From<crate::delivery_enemy_table_generated::TokuseiType> for Tokusei {
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default, Debug)]
 pub enum Seikaku {
     #[default]
     Random,
@@ -277,7 +277,7 @@ impl From<crate::delivery_enemy_table_generated::SeikakuType> for Seikaku {
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub enum Gender {
     Random,
     Male,
@@ -304,7 +304,7 @@ impl From<crate::delivery_enemy_table_generated::SexType> for Gender {
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub enum IvType {
     Random,
     VNum,
@@ -331,7 +331,7 @@ impl From<crate::delivery_enemy_table_generated::TalentType> for IvType {
     }
 }
 
-#[derive(Copy, Clone, Default)]
+#[derive(Copy, Clone, Default, Debug)]
 pub struct ExtraAction {
     pub trigger: ExtraActionTrigger,
     pub action: ExtraActionType,
@@ -339,7 +339,7 @@ pub struct ExtraAction {
     pub move_no: Option<u16>,
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default, Debug)]
 pub enum ExtraActionTrigger {
     #[default]
     None,
@@ -367,7 +367,7 @@ impl From<crate::delivery_enemy_table_generated::RaidBossExtraTimingType> for Ex
     }
 }
 
-#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
+#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Default, Debug)]
 pub enum ExtraActionType {
     #[default]
     None,

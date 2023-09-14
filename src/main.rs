@@ -1,7 +1,5 @@
 use clap::{Parser, ValueEnum};
-use sv_raid_reader::{
-    read_raids, Filter, GameProgress, GameVersion, RAID_BLOCK_POINTER, RAID_BLOCK_SIZE,
-};
+use sv_raid_reader::{read_raids, Filter, GameProgress, GameVersion, RAID_BLOCK_POINTER, RAID_BLOCK_SIZE, SU1_DIFFICULTY_02};
 use sysbot_rs::SysBotClient;
 
 #[derive(Parser)]
@@ -87,6 +85,8 @@ impl Into<GameProgress> for Progress {
 }
 
 fn main() {
+    let test = SU1_DIFFICULTY_02.to_vec();
+    println!("{:?}", test);
     let cli: Cli = Cli::parse();
 
     let filter = Filter::default()
