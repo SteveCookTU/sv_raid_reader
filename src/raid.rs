@@ -27,6 +27,12 @@ pub const SU1_DIFFICULTY_03_RAW: &[u8] = include_bytes!("../resources/su1_diffic
 pub const SU1_DIFFICULTY_04_RAW: &[u8] = include_bytes!("../resources/su1_difficulty_04");
 pub const SU1_DIFFICULTY_05_RAW: &[u8] = include_bytes!("../resources/su1_difficulty_05");
 pub const SU1_DIFFICULTY_06_RAW: &[u8] = include_bytes!("../resources/su1_difficulty_06");
+pub const SU2_DIFFICULTY_01_RAW: &[u8] = include_bytes!("../resources/su2_difficulty_01");
+pub const SU2_DIFFICULTY_02_RAW: &[u8] = include_bytes!("../resources/su2_difficulty_02");
+pub const SU2_DIFFICULTY_03_RAW: &[u8] = include_bytes!("../resources/su2_difficulty_03");
+pub const SU2_DIFFICULTY_04_RAW: &[u8] = include_bytes!("../resources/su2_difficulty_04");
+pub const SU2_DIFFICULTY_05_RAW: &[u8] = include_bytes!("../resources/su2_difficulty_05");
+pub const SU2_DIFFICULTY_06_RAW: &[u8] = include_bytes!("../resources/su2_difficulty_06");
 pub const DELIVERY_RAW: &[u8] = include_bytes!("../resources/delivery_enemy_array");
 
 lazy_static! {
@@ -109,6 +115,48 @@ lazy_static! {
             .collect();
     pub static ref SU1_DIFFICULTY_06: Vec<RaidEncounter> =
         root_as_raid_enemy_table_01_array(SU1_DIFFICULTY_06_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref SU2_DIFFICULTY_01: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(SU2_DIFFICULTY_01_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref SU2_DIFFICULTY_02: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(SU2_DIFFICULTY_02_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref SU2_DIFFICULTY_03: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(SU2_DIFFICULTY_03_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref SU2_DIFFICULTY_04: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(SU2_DIFFICULTY_04_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref SU2_DIFFICULTY_05: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(SU2_DIFFICULTY_05_RAW)
+            .unwrap()
+            .values()
+            .into_iter()
+            .map(|v| v.raidEnemyInfo().into())
+            .collect();
+    pub static ref SU2_DIFFICULTY_06: Vec<RaidEncounter> =
+        root_as_raid_enemy_table_01_array(SU2_DIFFICULTY_06_RAW)
             .unwrap()
             .values()
             .into_iter()
