@@ -561,8 +561,8 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
             second_shield_time_trigger: info.bossDesc().doubleActionTrigerTime() as u8,
             second_shield_damage_rate: info.bossDesc().doubleActionRate() as u8,
             extra_actions,
-            game_limit: info.raidTimeData().gameLimit() as u32,
-            command_limit: info.raidTimeData().commandLimit() as u32,
+            game_limit: if info.raidTimeData().gameLimit() != 0 { info.raidTimeData().gameLimit() as u32 } else { 300 },
+            command_limit: if info.raidTimeData().commandLimit() != 0 { info.raidTimeData().commandLimit() as u32 } else { 300 },
             fixed_item_table: info.dropTableFix(),
             lottery_item_table: info.dropTableRandom(),
         }
