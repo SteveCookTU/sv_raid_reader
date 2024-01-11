@@ -1,5 +1,8 @@
 use clap::{Parser, ValueEnum};
-use sv_raid_reader::{read_raids, Filter, GameProgress, GameVersion, RAID_BLOCK_POINTER, RAID_BLOCK_SIZE, SU1_DIFFICULTY_02};
+use sv_raid_reader::{
+    read_raids, Filter, GameProgress, GameVersion, RAID_BLOCK_POINTER, RAID_BLOCK_SIZE,
+    SU1_DIFFICULTY_02,
+};
 use sysbot_rs::SysBotClient;
 
 #[derive(Parser)]

@@ -492,8 +492,16 @@ impl From<crate::raid_enemy_table_01_generated::RaidEnemyInfo<'_>> for RaidEncou
             second_shield_time_trigger: info.bossDesc().doubleActionTrigerTime() as u8,
             second_shield_damage_rate: info.bossDesc().doubleActionRate() as u8,
             extra_actions,
-            game_limit: info.raidTimeData().gameLimit() as u32,
-            command_limit: info.raidTimeData().commandLimit() as u32,
+            game_limit: if info.raidTimeData().gameLimit() != 0 {
+                info.raidTimeData().gameLimit() as u32
+            } else {
+                300
+            },
+            command_limit: if info.raidTimeData().commandLimit() != 0 {
+                info.raidTimeData().commandLimit() as u32
+            } else {
+                300
+            },
             fixed_item_table: info.dropTableFix(),
             lottery_item_table: info.dropTableRandom(),
         }
@@ -561,8 +569,8 @@ impl From<crate::delivery_enemy_table_generated::RaidEnemyInfo<'_>> for RaidEnco
             second_shield_time_trigger: info.bossDesc().doubleActionTrigerTime() as u8,
             second_shield_damage_rate: info.bossDesc().doubleActionRate() as u8,
             extra_actions,
-            game_limit: if info.raidTimeData().gameLimit() != 0 { info.raidTimeData().gameLimit() as u32 } else { 300 },
-            command_limit: if info.raidTimeData().commandLimit() != 0 { info.raidTimeData().commandLimit() as u32 } else { 300 },
+            game_limit: info.raidTimeData().gameLimit() as u32,
+            command_limit: info.raidTimeData().commandLimit() as u32,
             fixed_item_table: info.dropTableFix(),
             lottery_item_table: info.dropTableRandom(),
         }
@@ -579,15 +587,9 @@ fn dev_id_to_species(dev_id: u16) -> u16 {
 }
 
 const DEV_ID_TO_SPECIES_DIFF: [i16; 109] = [
-    65, -1, -1,
-    -1, -1, 31, 31, 47, 47, 29, 29, 53, 31,
-    31, 46, 44, 30, 30, -7, -7, -7, 13, 13,
-    -2, -2, 23, 23, 24, -21, -21, 27, 27, 47,
-    47, 47, 26, 14, -33, -33, -33, -17, -17, 3,
-    -29, 12, -12, -31, -31, -31, 3, 3, -24, -24,
-    -44, -44, -30, -30, -28, -28, 23, 23, 6, 7,
-    29, 8, 3, 4, 4, 20, 4, 23, 6, 3,
-    3, 4, -1, 13, 9, 7, 5, 7, 9, 9,
-    -43, -43, -43, -68, -68, -68, -58, -58, -25, -29,
+    65, -1, -1, -1, -1, 31, 31, 47, 47, 29, 29, 53, 31, 31, 46, 44, 30, 30, -7, -7, -7, 13, 13, -2,
+    -2, 23, 23, 24, -21, -21, 27, 27, 47, 47, 47, 26, 14, -33, -33, -33, -17, -17, 3, -29, 12, -12,
+    -31, -31, -31, 3, 3, -24, -24, -44, -44, -30, -30, -28, -28, 23, 23, 6, 7, 29, 8, 3, 4, 4, 20,
+    4, 23, 6, 3, 3, 4, -1, 13, 9, 7, 5, 7, 9, 9, -43, -43, -43, -68, -68, -68, -58, -58, -25, -29,
     -31, 6, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -12, -12,
 ];

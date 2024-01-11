@@ -96,9 +96,14 @@ lazy_static! {
         root_as_raid_enemy_table_01_array(SU1_DIFFICULTY_03_RAW)
             .unwrap()
             .values()
-            .into_iter()
-            .map(|v| v.raidEnemyInfo().into())
-            .collect();
+            .into_iter().enumerate()
+            .map(|(i, v)| {
+                let enc: RaidEncounter = v.raidEnemyInfo().into();
+                if i == 0 {
+                    println!("{}", enc.game_limit);
+                }
+                enc
+            }).collect();
     pub static ref SU1_DIFFICULTY_04: Vec<RaidEncounter> =
         root_as_raid_enemy_table_01_array(SU1_DIFFICULTY_04_RAW)
             .unwrap()
